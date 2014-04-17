@@ -48,4 +48,8 @@ local.properties
 .cproject
 
 # PDT-specific
+<<<<<<< HEAD
 .buildpath
+=======
+.buildpath
+>>>>>>> feeb44d49e121102b486345894b034b806f43379
