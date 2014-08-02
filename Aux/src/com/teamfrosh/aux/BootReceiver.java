@@ -13,8 +13,10 @@ public class BootReceiver extends BroadcastReceiver {
 		Log.d("BOOT RECEIVER TAG", "boot receiver");
 		CharSequence seq = "Boot receiver";
 		Toast.makeText(context, seq, Toast.LENGTH_SHORT).show();
-		Intent intent = new Intent(context, LocationUpdaterService.class);
-		context.startService(intent);
+		Intent locationIntent = new Intent(context, LocationUpdaterService.class);
+		context.startService(locationIntent);
+		Intent activityRecognizerIntent = new Intent(context, ActivityRecognizerService.class);
+		context.startService(activityRecognizerIntent);
 	}
 
 }

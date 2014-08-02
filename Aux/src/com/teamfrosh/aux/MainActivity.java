@@ -2,14 +2,17 @@ package com.teamfrosh.aux;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -22,17 +25,22 @@ public class MainActivity extends Activity {
 	private SharedPreferences.Editor mEditor;
 	public static final String BROWSER_API_KEY = "AIzaSyChWPi9Evjiaj7RyBfwMWMoNQ5fpnSsqGg";
 	public static final String ANDROID_API_KEY = "AIzaSyA0HBA4HpGbL2KkeGhIi6hbCUVjfJB1UpQ";
-	public static final String TAG = "GOOGLE_PLACES_API_TEST";
+	public static final String TAG = "AUX_TAG";
+	public static final String ACTIVITY_TAG = "AUX_ACTIVITY_TAG";
+	public static final String LOCATION_TAG = "AUX_LOCATION_TAG";
 	public static final String ON_ACTIVITY_RESULT_TAG = "ON ACTIVITY RESULT TAG";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-    
+    private ActivityRecognizerReceiver receiver;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		if (servicesConnected()) {
-			Intent intent = new Intent(this, LocationUpdaterService.class);
-			this.startService(intent);
+			//Intent locationIntent = new Intent(this, LocationUpdaterService.class);
+			//this.startService(locationIntent);
+			Intent activityRecognizerIntent = new Intent(this, ActivityRecognizerService.class);
+			this.startService(activityRecognizerIntent);
 
 			setContentView(R.layout.activity_main);
 
@@ -41,22 +49,26 @@ public class MainActivity extends Activity {
 					Context.MODE_PRIVATE);
 			// Get a SharedPreferences editor
 			mEditor = mPrefs.edit();
+
+			IntentFilter filter = new IntentFilter(ActivityRecognizerReceiver.ACTIVITY_RECOGNIZED);
+			receiver = new ActivityRecognizerReceiver();
+			registerReceiver(receiver, filter);
 		}
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// Save the current setting for updates 
+		// Save the current setting for updates
 		mEditor.putBoolean("KEY_UPDATES_ON", mUpdatesRequested);
 		mEditor.commit();
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -122,5 +134,21 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+	/* RECEIVER CLASS */
+	public class ActivityRecognizerReceiver extends BroadcastReceiver {
+
+		public static final String ACTIVITY_RECOGNIZED = "com.teamfrosh.aux.activity_recognized";
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String activityName = intent.getStringExtra(getString(R.string.activity_name_tag));
+			TextView myTextView = (TextView) findViewById(R.id.textView1);
+			myTextView.setText(activityName);
+		}
+
+	}
+
 
 }

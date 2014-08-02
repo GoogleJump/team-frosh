@@ -13,11 +13,9 @@ import android.util.Log;
 public class GetPlaces extends AsyncTask<Void, Void, ArrayList<Place>> {
 
 	public static final String BROWSER_API_KEY = "AIzaSyChWPi9Evjiaj7RyBfwMWMoNQ5fpnSsqGg";
-	public static final String GET_PLACES_TAG = "GET_PLACES_TAG";
-	private ProgressDialog dialog;
-	private Context context;
 	private ArrayList<String> places;
 	private Location loc;
+	private Context context;
 
 	public GetPlaces(Context context, ArrayList<String> places, Location location) {
 		this.context = context;
@@ -32,7 +30,7 @@ public class GetPlaces extends AsyncTask<Void, Void, ArrayList<Place>> {
 		for (int i = 0; i < result.size(); i++) {
 			Place place = result.get(i);
 			Location.distanceBetween(loc.getLatitude(), loc.getLatitude(), place.getLatitude(), place.getLongitude(), distanceResults);
-			Log.v(GET_PLACES_TAG, "" + place + ", ...with a distance of "
+			Log.v(MainActivity.LOCATION_TAG, "" + place + ", ...with a distance of "
 					+ distanceResults[0] + " from location");
 		}
 	}
