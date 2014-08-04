@@ -6,4 +6,5 @@
     <string name="action_settings">Settings</string>
 	<string name="activity_name_tag">activity_name_tag</string>
 	<string name="settings_array_tag">settings_array_tag</string>
+	<string name="echo_location_info">echo_location_info_tag</string>
 </resources>

@@ -1,18 +1,28 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.teamfrosh.aux.MainActivity"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame"
+    android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/activity_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
      	android:gravity="center"
      	android:textSize="30sp"
-        android:text="TextView" />
+        android:text="Activity Text View" />
+    
+    <TextView
+        android:id="@+id/echo_location_info_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+     	android:gravity="center"
+     	android:textSize="30sp"
+        android:text="Location Info Text View" />
 
-</FrameLayout>
+</LinearLayout>

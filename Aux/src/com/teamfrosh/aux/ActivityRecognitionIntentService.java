@@ -63,9 +63,9 @@ public class ActivityRecognitionIntentService extends IntentService {
             Resources res = getResources();
             Intent settingsIntent = new Intent(this, SettingsIntentService.class);
             if (activityName.equals("still")) {
-            	settingsIntent.putExtra(getString(R.string.settings_array_tag), res.getIntArray(R.array.default_low_settings));
-            } else {
             	settingsIntent.putExtra(getString(R.string.settings_array_tag), res.getIntArray(R.array.default_high_settings));
+            } else {
+            	settingsIntent.putExtra(getString(R.string.settings_array_tag), res.getIntArray(R.array.default_low_settings));
             }
             startService(settingsIntent);
             

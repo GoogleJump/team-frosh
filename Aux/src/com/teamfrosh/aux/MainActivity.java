@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
 			mEditor = mPrefs.edit();
 
 			IntentFilter filter = new IntentFilter(ActivityRecognizerReceiver.ACTIVITY_RECOGNIZED);
+			filter.addAction(ActivityRecognizerReceiver.ECHO_LOCATION_INFO);
 			filter.addCategory(Intent.CATEGORY_DEFAULT);
 			receiver = new ActivityRecognizerReceiver();
 			registerReceiver(receiver, filter);
@@ -142,12 +143,21 @@ public class MainActivity extends Activity {
 	public class ActivityRecognizerReceiver extends BroadcastReceiver {
 
 		public static final String ACTIVITY_RECOGNIZED = "com.teamfrosh.aux.activity_recognized";
-
+		public static final String ECHO_LOCATION_INFO = "com.teamfrosh.aux.echo_location_info";
+		
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String activityName = intent.getStringExtra(getString(R.string.activity_name_tag));
-			TextView myTextView = (TextView) findViewById(R.id.textView1);
-			myTextView.setText(activityName);
+			if (activityName != null && activityName.length() > 0) {
+				TextView activityTextView = (TextView) findViewById(R.id.activity_text_view);
+				activityTextView.setText(activityName);
+			}
+			
+			String locationInfo = intent.getStringExtra(getString(R.string.echo_location_info));
+			if (locationInfo != null && locationInfo.length() > 0) {
+				TextView locationInfoTextView = (TextView) findViewById(R.id.echo_location_info_text_view);
+				locationInfoTextView.setText(locationInfo);
+			}
 		}
 
 	}

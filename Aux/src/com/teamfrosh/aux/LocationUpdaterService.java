@@ -139,7 +139,7 @@ com.google.android.gms.location.LocationListener {
         showShortToast(msg);
         ArrayList<String> places = new ArrayList<String>();
         places.add("movie_theater");
-        places.add("atm");
+        //places.add("atm");
         GetPlaces getPlaces = new GetPlaces(this, places, location);
         getPlaces.execute();
 	}
