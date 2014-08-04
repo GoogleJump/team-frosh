@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 	public static final String TAG = "AUX_TAG";
 	public static final String ACTIVITY_TAG = "AUX_ACTIVITY_TAG";
 	public static final String LOCATION_TAG = "AUX_LOCATION_TAG";
+	public static final String SETTINGS_TAG = "AUX_SETTINGS_TAG";
 	public static final String ON_ACTIVITY_RESULT_TAG = "ON ACTIVITY RESULT TAG";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private ActivityRecognizerReceiver receiver;
@@ -37,8 +38,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		if (servicesConnected()) {
-			//Intent locationIntent = new Intent(this, LocationUpdaterService.class);
-			//this.startService(locationIntent);
+			Intent locationIntent = new Intent(this, LocationUpdaterService.class);
+			this.startService(locationIntent);
 			Intent activityRecognizerIntent = new Intent(this, ActivityRecognizerService.class);
 			this.startService(activityRecognizerIntent);
 
@@ -51,6 +52,7 @@ public class MainActivity extends Activity {
 			mEditor = mPrefs.edit();
 
 			IntentFilter filter = new IntentFilter(ActivityRecognizerReceiver.ACTIVITY_RECOGNIZED);
+			filter.addCategory(Intent.CATEGORY_DEFAULT);
 			receiver = new ActivityRecognizerReceiver();
 			registerReceiver(receiver, filter);
 		}

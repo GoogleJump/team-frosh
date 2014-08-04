@@ -27,11 +27,16 @@ public class GetPlaces extends AsyncTask<Void, Void, ArrayList<Place>> {
 	protected void onPostExecute(ArrayList<Place> result) {
 		super.onPostExecute(result);
 		float[] distanceResults = new float[1];
-		for (int i = 0; i < result.size(); i++) {
-			Place place = result.get(i);
-			Location.distanceBetween(loc.getLatitude(), loc.getLatitude(), place.getLatitude(), place.getLongitude(), distanceResults);
-			Log.v(MainActivity.LOCATION_TAG, "" + place + ", ...with a distance of "
-					+ distanceResults[0] + " from location");
+		if (result != null) {
+			for (int i = 0; i < result.size(); i++) {
+				Place place = result.get(i);
+				Location.distanceBetween(loc.getLatitude(), loc.getLatitude(),
+						place.getLatitude(), place.getLongitude(),
+						distanceResults);
+				Log.v(MainActivity.LOCATION_TAG, "" + place
+						+ ", ...with a distance of " + distanceResults[0]
+						+ " from location");
+			}
 		}
 	}
 

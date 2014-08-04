@@ -6,6 +6,7 @@ import com.teamfrosh.aux.MainActivity.ActivityRecognizerReceiver;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.util.Log;
 
@@ -55,8 +56,19 @@ public class ActivityRecognitionIntentService extends IntentService {
             Log.v(MainActivity.ACTIVITY_TAG, "Activity = " + activityName);
             Intent broadcastIntent = new Intent();
             broadcastIntent.setAction(ActivityRecognizerReceiver.ACTIVITY_RECOGNIZED);
+            broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
             broadcastIntent.putExtra(getString(R.string.activity_name_tag), activityName);
             sendBroadcast(broadcastIntent);
+            
+            Resources res = getResources();
+            Intent settingsIntent = new Intent(this, SettingsIntentService.class);
+            if (activityName.equals("still")) {
+            	settingsIntent.putExtra(getString(R.string.settings_array_tag), res.getIntArray(R.array.default_low_settings));
+            } else {
+            	settingsIntent.putExtra(getString(R.string.settings_array_tag), res.getIntArray(R.array.default_high_settings));
+            }
+            startService(settingsIntent);
+            
         } else {
             /*
              * This implementation ignores intents that don't contain

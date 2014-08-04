@@ -41,7 +41,7 @@ com.google.android.gms.location.LocationListener {
     // Milliseconds per second
     private static final int MILLISECONDS_PER_SECOND = 1000;
     // Update frequency in seconds
-    public static final int UPDATE_INTERVAL_IN_SECONDS = 100;
+    public static final int UPDATE_INTERVAL_IN_SECONDS = 20;
     // Update frequency in milliseconds
     private static final long UPDATE_INTERVAL =
             MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
