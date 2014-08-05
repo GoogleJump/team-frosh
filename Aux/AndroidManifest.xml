@@ -43,16 +43,8 @@
         </receiver>
         <service android:name="com.teamfrosh.aux.LocationUpdaterService" />
         <service android:name="com.teamfrosh.aux.ActivityRecognizerService" />
-        <service
-    		android:name="com.teamfrosh.aux.ActivityRecognitionIntentService"
-    		android:exported="false"
-    		android:enabled="true">
-		</service>
-		<service
-    		android:name="com.teamfrosh.aux.SettingsIntentService"
-    		android:exported="false"
-    		android:enabled="true">
-		</service>
+        <service android:name="com.teamfrosh.aux.ActivityRecognitionIntentService" />
+		<service android:name="com.teamfrosh.aux.SettingsIntentService" />
         <meta-data android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
     </application>

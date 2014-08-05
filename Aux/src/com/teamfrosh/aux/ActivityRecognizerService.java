@@ -81,7 +81,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
     		// Do nothing
     	}
     }
-    
+
     public void stopUpdates() {
     	mRequestType = REQUEST_TYPE.STOP;
     	if (!mInProgress) {
