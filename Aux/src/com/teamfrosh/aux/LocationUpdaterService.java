@@ -158,7 +158,7 @@ com.google.android.gms.location.LocationListener {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG)
 						.show();
 			}
 		});

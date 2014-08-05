@@ -12,6 +12,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -32,16 +34,18 @@ public class MainActivity extends Activity {
 	public static final String ON_ACTIVITY_RESULT_TAG = "ON ACTIVITY RESULT TAG";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private ActivityRecognizerReceiver receiver;
+    private Switch locationSwitch;
+    private Switch activitySwitch;
+    private Intent locationIntent;
+    private Intent activityRecognizerIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if (servicesConnected()) {
-			Intent locationIntent = new Intent(this, LocationUpdaterService.class);
-			this.startService(locationIntent);
-			Intent activityRecognizerIntent = new Intent(this, ActivityRecognizerService.class);
-			this.startService(activityRecognizerIntent);
+			locationIntent = new Intent(this, LocationUpdaterService.class);
+			activityRecognizerIntent = new Intent(this, ActivityRecognizerService.class);
 
 			setContentView(R.layout.activity_main);
 
@@ -56,6 +60,36 @@ public class MainActivity extends Activity {
 			filter.addCategory(Intent.CATEGORY_DEFAULT);
 			receiver = new ActivityRecognizerReceiver();
 			registerReceiver(receiver, filter);
+			
+			Switch locationSwitch = (Switch) findViewById(R.id.location_switch);
+			locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (isChecked) {
+						mEditor.putBoolean(getString(R.string.prefs_key_location_updates), true);
+						mEditor.commit();
+						startService(locationIntent);
+					} else {
+						mEditor.putBoolean(getString(R.string.prefs_key_location_updates), false);
+						mEditor.commit();
+						stopService(locationIntent);
+					}
+				}
+			});
+			
+			Switch activitySwitch = (Switch) findViewById(R.id.activity_switch);
+			activitySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (isChecked) {
+						mEditor.putBoolean(getString(R.string.prefs_key_activity_updates), true);
+						mEditor.commit();
+						startService(activityRecognizerIntent);
+					} else {
+						mEditor.putBoolean(getString(R.string.prefs_key_activity_updates), true);
+						mEditor.commit();
+						startService(activityRecognizerIntent);
+					}
+				}
+			});
 		}
 	}
 
@@ -75,6 +109,19 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (mPrefs.getBoolean(getString(R.string.prefs_key_location_updates), true)) {
+			startService(locationIntent);
+		} else {
+			stopService(locationIntent);
+		}
+		
+		if (mPrefs.getBoolean(getString(R.string.prefs_key_activity_updates), true)) {
+			startService(activityRecognizerIntent);
+		} else {
+			stopService(activityRecognizerIntent);
+		}
+		
+		
 		/*
          * Get any previous setting for location updates
          * Gets "false" if an error occurs
@@ -159,7 +206,6 @@ public class MainActivity extends Activity {
 				locationInfoTextView.setText(locationInfo);
 			}
 		}
-
 	}
 
 

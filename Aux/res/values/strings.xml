@@ -7,4 +7,8 @@
 	<string name="activity_name_tag">activity_name_tag</string>
 	<string name="settings_array_tag">settings_array_tag</string>
 	<string name="echo_location_info">echo_location_info_tag</string>
+	<string name="location_services_toggle">Location Services Toggle</string>
+	<string name="activity_recognition_toggle">Activity Recognition Toggle</string>
+	<string name="prefs_key_location_updates">key_location_updates</string>
+	<string name="prefs_key_activity_updates">key_activity_updates</string>
 </resources>

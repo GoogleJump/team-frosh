@@ -11,18 +11,35 @@
         android:id="@+id/activity_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
      	android:gravity="center"
-     	android:textSize="30sp"
+     	android:textSize="15sp"
         android:text="Activity Text View" />
     
     <TextView
         android:id="@+id/echo_location_info_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
      	android:gravity="center"
-     	android:textSize="30sp"
+     	android:textSize="15sp"
         android:text="Location Info Text View" />
+    
+    <Switch
+        android:id="@+id/location_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/location_services_toggle" />
+    
+    <Switch
+        android:id="@+id/activity_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/activity_recognition_toggle" />
+    
 
 </LinearLayout>
