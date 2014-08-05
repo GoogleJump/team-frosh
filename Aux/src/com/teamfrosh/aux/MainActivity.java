@@ -203,6 +203,9 @@ public class MainActivity extends Activity {
 		case R.id.action_add_profile:
 			Toast.makeText(this, "Add Pressed", Toast.LENGTH_SHORT).show();
 			return true;
+		case R.id.action_settings:
+			Toast.makeText(this, "Settings Pressed", Toast.LENGTH_SHORT).show();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
