@@ -41,7 +41,7 @@ com.google.android.gms.location.LocationListener {
     // Milliseconds per second
     private static final int MILLISECONDS_PER_SECOND = 1000;
     // Update frequency in seconds
-    public static final int UPDATE_INTERVAL_IN_SECONDS = 20;
+    public static final int UPDATE_INTERVAL_IN_SECONDS = 5;
     // Update frequency in milliseconds
     private static final long UPDATE_INTERVAL =
             MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
@@ -92,6 +92,24 @@ com.google.android.gms.location.LocationListener {
 
 		return START_STICKY;
 	}
+
+    @Override
+    public void onDestroy() {
+        /* Stop updates and disconnect */
+        if (mLocationClient.isConnected()) {
+        	/*
+        	 * Remove location updates for a listener.
+        	 * The current Service is the listener, so 
+        	 * the argument is "this."
+        	 */
+        	mLocationClient.removeLocationUpdates(this);
+        }
+        /*
+         * After disconnect() is called, the client is considered "dead"
+         */
+        mLocationClient.disconnect();
+        super.onDestroy();
+    }
 
 	/*
      * Called by Location Services if the attempt to

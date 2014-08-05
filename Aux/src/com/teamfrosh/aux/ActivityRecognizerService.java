@@ -14,10 +14,12 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 public class ActivityRecognizerService extends Service implements
 GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
-	
+
 	// Flag that indicates if a request is underway
 	private boolean mInProgress;
-	
+	public enum REQUEST_TYPE { START, STOP }
+	public REQUEST_TYPE mRequestType;
+
 	// Constants that define the activity detection interval
     public static final int MILLISECONDS_PER_SECOND = 1000;
     public static final int DETECTION_INTERVAL_SECONDS = 5;
@@ -36,7 +38,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	public int onStartCommand(Intent intent, int flags, int startId) {
     	Log.v(MainActivity.ACTIVITY_TAG, "Activity Recognizer Service Started");
     	mInProgress = false;
-    	
+
     	/*
          * Instantiate a new activity recognition client. Since the
          * parent Activity implements the connection listener and
@@ -59,15 +61,31 @@ GooglePlayServicesClient.OnConnectionFailedListener {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         startUpdates();
 
-    	
+
     	return START_STICKY;
     }
-    
+
+    @Override
+    public void onDestroy() {
+    	stopUpdates();
+    }
+
     public void startUpdates() {
+    	mRequestType = REQUEST_TYPE.START;
     	if (!mInProgress) {
     		// Indicate that a request is in progress
     		mInProgress = true;
     		// Request a connection to Location Services
+    		mActivityRecognitionClient.connect();
+    	} else {
+    		// Do nothing
+    	}
+    }
+    
+    public void stopUpdates() {
+    	mRequestType = REQUEST_TYPE.STOP;
+    	if (!mInProgress) {
+    		mInProgress = true;
     		mActivityRecognitionClient.connect();
     	} else {
     		// Do nothing
@@ -89,14 +107,26 @@ GooglePlayServicesClient.OnConnectionFailedListener {
      */
     @Override
     public void onConnected(Bundle dataBundle) {
-        /*
-         * Request activity recognition updates using the preset
-         * detection interval and PendingIntent. This call is
-         * synchronous.
-         */
-        mActivityRecognitionClient.requestActivityUpdates(
-                DETECTION_INTERVAL_MILLISECONDS,
-                mActivityRecognitionPendingIntent);
+		switch (mRequestType) {
+		case START:
+			/*
+			 * Request activity recognition updates using the preset detection
+			 * interval and PendingIntent. This call is synchronous.
+			 */
+			mActivityRecognitionClient.requestActivityUpdates(
+					DETECTION_INTERVAL_MILLISECONDS,
+					mActivityRecognitionPendingIntent);
+			break;
+		case STOP:
+			mActivityRecognitionClient.removeActivityUpdates(mActivityRecognitionPendingIntent);
+		default:
+			try {
+				throw new Exception("Unknown request type in onConnected().");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
         /*
          * Since the preceding call is synchronous, turn off the
          * in progress flag and disconnect the client

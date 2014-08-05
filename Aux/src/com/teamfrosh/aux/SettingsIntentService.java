@@ -53,7 +53,6 @@ public class SettingsIntentService extends IntentService {
 	}
 
     public void toggleBluetooth(boolean status) {
-    	Log.e(MainActivity.SETTINGS_TAG, "Bluetooth");
     	BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (status && !bluetoothAdapter.isEnabled()) {
         	bluetoothAdapter.enable();
@@ -64,7 +63,6 @@ public class SettingsIntentService extends IntentService {
     }
 
     public void toggleWifi(boolean status) {
-    	Log.e(MainActivity.SETTINGS_TAG, "Wifi");
 		WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 		if (status && !wifiManager.isWifiEnabled()) {
 			wifiManager.setWifiEnabled(true);
@@ -74,7 +72,6 @@ public class SettingsIntentService extends IntentService {
 	}
 
     public void setVolume(int volume) {
-    	Log.e(MainActivity.SETTINGS_TAG, "Volume");
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         audioManager.setStreamVolume(AudioManager.STREAM_RING, volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
     }

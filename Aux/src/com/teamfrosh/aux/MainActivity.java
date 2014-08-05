@@ -61,14 +61,16 @@ public class MainActivity extends Activity {
 			receiver = new ActivityRecognizerReceiver();
 			registerReceiver(receiver, filter);
 			
-			Switch locationSwitch = (Switch) findViewById(R.id.location_switch);
+			locationSwitch = (Switch) findViewById(R.id.location_switch);
 			locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					Log.v(TAG, "In location listener");
 					if (isChecked) {
 						mEditor.putBoolean(getString(R.string.prefs_key_location_updates), true);
 						mEditor.commit();
 						startService(locationIntent);
 					} else {
+						Log.v(TAG, "Kill location");
 						mEditor.putBoolean(getString(R.string.prefs_key_location_updates), false);
 						mEditor.commit();
 						stopService(locationIntent);
@@ -76,7 +78,7 @@ public class MainActivity extends Activity {
 				}
 			});
 			
-			Switch activitySwitch = (Switch) findViewById(R.id.activity_switch);
+			activitySwitch = (Switch) findViewById(R.id.activity_switch);
 			activitySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					if (isChecked) {
@@ -84,9 +86,9 @@ public class MainActivity extends Activity {
 						mEditor.commit();
 						startService(activityRecognizerIntent);
 					} else {
-						mEditor.putBoolean(getString(R.string.prefs_key_activity_updates), true);
+						mEditor.putBoolean(getString(R.string.prefs_key_activity_updates), false);
 						mEditor.commit();
-						startService(activityRecognizerIntent);
+						stopService(activityRecognizerIntent);
 					}
 				}
 			});
@@ -110,14 +112,18 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		if (mPrefs.getBoolean(getString(R.string.prefs_key_location_updates), true)) {
+			locationSwitch.setChecked(true);
 			startService(locationIntent);
 		} else {
+			locationSwitch.setChecked(false);
 			stopService(locationIntent);
 		}
 		
 		if (mPrefs.getBoolean(getString(R.string.prefs_key_activity_updates), true)) {
+			activitySwitch.setChecked(true);
 			startService(activityRecognizerIntent);
 		} else {
+			activitySwitch.setChecked(false);
 			stopService(activityRecognizerIntent);
 		}
 		
