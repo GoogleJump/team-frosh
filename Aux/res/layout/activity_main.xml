@@ -3,44 +3,56 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.teamfrosh.aux.MainActivity"
-    tools:ignore="MergeRootFrame"
-    android:orientation="vertical" >
+    tools:ignore="MergeRootFrame" >
 
     <TextView
         android:id="@+id/activity_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-     	android:gravity="center"
-     	android:textSize="15sp"
-        android:text="Activity Text View" />
-    
+        android:gravity="center"
+        android:text="Activity Text View"
+        android:textSize="15sp"
+        android:layout_weight="1" />
+
     <TextView
         android:id="@+id/echo_location_info_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-     	android:gravity="center"
-     	android:textSize="15sp"
-        android:text="Location Info Text View" />
-    
+        android:gravity="center"
+        android:text="Location Info Text View"
+        android:textSize="15sp"
+        android:layout_weight="1" />
+
     <Switch
         android:id="@+id/location_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:checked="true"
         android:text="@string/location_services_toggle"
-        android:checked="true" />
-    
+        android:layout_weight="1" />
+
     <Switch
         android:id="@+id/activity_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:checked="true"
         android:text="@string/activity_recognition_toggle"
-        android:checked="true" />  
+        android:layout_weight="1" />
 
+    <fragment
+        android:name="com.teamfrosh.aux.ProfileLoaderListFragment"
+        android:id="@+id/profile_list_fragment"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="200dp"
+        android:layout_weight="15" />
+    
 </LinearLayout>

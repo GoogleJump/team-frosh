@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
 	public static final String ACTIVITY_TAG = "AUX_ACTIVITY_TAG";
 	public static final String LOCATION_TAG = "AUX_LOCATION_TAG";
 	public static final String SETTINGS_TAG = "AUX_SETTINGS_TAG";
+	public static final String LIST_TAG = "AUX_LIST_TAG";
 	public static final String ON_ACTIVITY_RESULT_TAG = "ON ACTIVITY RESULT TAG";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private ActivityRecognizerReceiver receiver;
@@ -51,7 +54,7 @@ public class MainActivity extends Activity {
 			activityRecognizerIntent = new Intent(this, ActivityRecognizerService.class);
 
 			setContentView(R.layout.activity_main);
-
+			
 			// Open the shared preferences
 			mPrefs = getSharedPreferences("SharedPreferences",
 					Context.MODE_PRIVATE);

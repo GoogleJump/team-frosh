@@ -128,6 +128,18 @@ public class DBAdapter {
     public boolean deleteProfile(long rowId) {
         return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) != 0;
     }
+    
+    // Delete ALL profiles
+    public void deleteAllProfiles() {
+    	Cursor c = getAllRows();
+    	long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
+    	if (c.moveToFirst()) {
+    		do {
+    			deleteProfile(c.getLong((int) rowId));
+    		} while (c.moveToNext());
+    	}
+    	c.close();
+    }
 
     // Get a profile
     public Cursor getProfile(long rowId) {
@@ -150,7 +162,19 @@ public class DBAdapter {
         }
         return c;
     }
-
+    
+    // Return all data in the database
+    public Cursor getAllRows() {
+    	String select = null;
+    	Cursor c = db.query(true,  DATABASE_TABLE, ALL_KEYS, select,
+    			null, null, null, null, null);
+    	if (c != null) {
+    		c.moveToFirst();
+    	}
+    	return c;
+    }
+    
+    /*** DATABASE HELPER CLASS ***/
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);

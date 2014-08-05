@@ -18,7 +18,8 @@
 
 	<!--  UI -->
 	<string name="action_add_profile">Add Profile</string>
-	    <string name="action_settings">Settings</string>
+	<string name="action_settings">Settings</string>
+	<string name="empty_profile_list">No Profiles</string>
 	
     <!-- DB Keys -->
     <string name="db_key_row_id">_id</string>
