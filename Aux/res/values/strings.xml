@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- General Strings -->
     <string name="app_name">Aux</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-	<string name="activity_name_tag">activity_name_tag</string>
-	<string name="settings_array_tag">settings_array_tag</string>
 	<string name="echo_location_info">echo_location_info_tag</string>
 	<string name="location_services_toggle">Location Services Toggle</string>
 	<string name="activity_recognition_toggle">Activity Recognition Toggle</string>
+
+    <!-- Tags -->
+	<string name="activity_name_tag">activity_name_tag</string>
+	<string name="settings_array_tag">settings_array_tag</string>
+
+    <!-- Prefs Keys -->
 	<string name="prefs_key_location_updates">key_location_updates</string>
 	<string name="prefs_key_activity_updates">key_activity_updates</string>
+
+    <!-- DB Keys -->
+    <string name="db_key_row_id">_id</string>
+    <string name="db_key_activity">db_key_activity</string>
+    <string name="db_key_place">db_key_place</string>
+    <string name="db_key_time">db_key_time</string>
+    <string name="db_key_day">db_key_day</string>
+    <string name="db_key_location">db_key_location</string>
+    <string name="db_key_bluetooth">db_key_bluetooth</string>
+    <string name="db_key_wifi">db_key_wifi</string>
+    <string name="db_key_volume">db_key_volume</string>
+    <string name="db_key_brightness">db_key_brightness</string>
+    <string name="db_key_location_services">db_key_location_services</string>
+    <string name="db_key_gps">db_key_gps</string>
+    <string name="db_key_airplane">db_key_airplane</string>
+
 </resources>
