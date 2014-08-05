@@ -17,6 +17,9 @@
 	<string name="prefs_key_location_updates">key_location_updates</string>
 	<string name="prefs_key_activity_updates">key_activity_updates</string>
 
+	<!--  UI -->
+	<string name="action_add_profile">Add Profile</string>
+	
     <!-- DB Keys -->
     <string name="db_key_row_id">_id</string>
     <string name="db_key_activity">db_key_activity</string>
