@@ -4,6 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <!--  Try to set back to 14 and see what happens -->
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />

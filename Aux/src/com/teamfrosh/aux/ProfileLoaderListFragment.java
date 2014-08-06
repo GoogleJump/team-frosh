@@ -27,13 +27,14 @@ public class ProfileLoaderListFragment extends ListFragment {
         
 		myDBAdapter = new DBAdapter(getActivity());
 		myDBAdapter.open();
+		//myDBAdapter.deleteAllProfiles();
 		Cursor allProfilesCursor = myDBAdapter.getAllProfiles();
 		myDBAdapter.close();
 		// Create an adapter we will use to display the loaded data
 		mAdapter = new ProfileSimpleCursorAdapter(getActivity(), 
 				R.layout.profile_list_item, allProfilesCursor, 
 				new String[] {DBAdapter.KEY_ACTIVITY, DBAdapter.KEY_PLACE},
-				new int[] {R.id.activity_text_view, R.id.place_text_view}, 0);
+				new int[] {R.id.activity_textview, R.id.place_textview}, 0);
 		setListAdapter(mAdapter);
 		
 		// Start out with a progress indicator

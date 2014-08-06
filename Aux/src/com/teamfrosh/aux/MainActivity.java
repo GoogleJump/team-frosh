@@ -226,13 +226,13 @@ public class MainActivity extends Activity {
 		public void onReceive(Context context, Intent intent) {
 			String activityName = intent.getStringExtra(getString(R.string.activity_name_tag));
 			if (activityName != null && activityName.length() > 0) {
-				TextView activityTextView = (TextView) findViewById(R.id.activity_text_view);
+				TextView activityTextView = (TextView) findViewById(R.id.activity_textview);
 				activityTextView.setText(activityName);
 			}
 			
 			String locationInfo = intent.getStringExtra(getString(R.string.echo_location_info));
 			if (locationInfo != null && locationInfo.length() > 0) {
-				TextView locationInfoTextView = (TextView) findViewById(R.id.echo_location_info_text_view);
+				TextView locationInfoTextView = (TextView) findViewById(R.id.echo_location_info_textview);
 				locationInfoTextView.setText(locationInfo);
 			}
 		}

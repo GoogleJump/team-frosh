@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -27,6 +28,7 @@ public class AddProfileActivity extends Activity implements
 	private SeekBar brightnessSeekBar;
 	private Switch wifiSwitch;
 	private Switch bluetoothSwitch;
+	private EditText nameTextView;
 	private ContentResolver cResolver;
 	public static final String TAG = "ADD_PROFILE_TAG";
 	private boolean useActivity;
@@ -41,6 +43,7 @@ public class AddProfileActivity extends Activity implements
 		brightnessSeekBar = (SeekBar) findViewById(R.id.brightness_seekbar);
 		wifiSwitch = (Switch) findViewById(R.id.wifi_toggle);
 		bluetoothSwitch = (Switch) findViewById(R.id.bluetooth_toggle);
+		nameTextView = (EditText) findViewById(R.id.profile_name_edittext);
 		cResolver = getContentResolver();
 		useActivity = false;
 		
@@ -68,7 +71,7 @@ public class AddProfileActivity extends Activity implements
             e.printStackTrace();
             currentBrightness = 100;
 		}
-		brightnessSeekBar.setProgress(100);
+		brightnessSeekBar.setProgress(currentBrightness);
 		brightnessSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
@@ -108,6 +111,8 @@ public class AddProfileActivity extends Activity implements
 	public void addProfileToDatabase() {
 		DBAdapter myDBAdapter = new DBAdapter(this);
 		myDBAdapter.open();
+		/* Name */
+		String name = nameTextView.getText().toString();
 		
 		/* Context */
 		String activityOrPlaceName;
@@ -125,20 +130,20 @@ public class AddProfileActivity extends Activity implements
 		String brightness = Integer.toString(brightnessSeekBar.getProgress());
 		String wifi;
 		if (wifiSwitch.isChecked()) {
-			wifi = "true";
+			wifi = "On";
 		} else {
-			wifi = "false";
+			wifi = "Off";
 		}
 		String bluetooth;
 		if (bluetoothSwitch.isChecked()) {
-			bluetooth = "true";
+			bluetooth = "On";
 		} else { 
-			bluetooth = "false";
+			bluetooth = "Off";
 		}
 		
-		String[] columns = {activityOrPlaceKey, DBAdapter.KEY_VOLUME, DBAdapter.KEY_BRIGHTNESS, 
+		String[] columns = {activityOrPlaceKey, DBAdapter.KEY_NAME, DBAdapter.KEY_VOLUME, DBAdapter.KEY_BRIGHTNESS, 
 				DBAdapter.KEY_WIFI, DBAdapter.KEY_BLUETOOTH};
-		String[] values = {activityOrPlaceName, volume, brightness, wifi, bluetooth};
+		String[] values = {activityOrPlaceName, name, volume, brightness, wifi, bluetooth};
 		myDBAdapter.insertProfile(columns, values);
 		myDBAdapter.close();
 	}

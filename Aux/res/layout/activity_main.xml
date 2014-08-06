@@ -8,7 +8,7 @@
     tools:ignore="MergeRootFrame" >
 
     <TextView
-        android:id="@+id/activity_text_view"
+        android:id="@+id/activity_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -18,7 +18,7 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/echo_location_info_text_view"
+        android:id="@+id/echo_location_info_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

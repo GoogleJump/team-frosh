@@ -7,13 +7,31 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp" >
+    
+    <TextView
+        android:id="@+id/profile_name_textview_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_name_textview_label"
+        android:textSize="20sp" />
+    
+    <EditText 
+        android:id="@+id/profile_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/profile_name_textview_label"
+        android:textSize="17sp"
+        android:layout_below="@id/profile_name_textview_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
 
     <TextView
         android:id="@+id/activity_or_place_spinner_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/activity_or_place_spinner_label"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@id/profile_name_edittext"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
 
     <LinearLayout
         android:id="@+id/spinner_layout"

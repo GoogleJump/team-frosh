@@ -14,6 +14,7 @@ public class DBAdapter {
 
 	/* General Keys */
 	public static String KEY_ROWID;
+	public static String KEY_NAME;
 
 	/* Context Keys */
 	public static String KEY_ACTIVITY;
@@ -53,6 +54,7 @@ public class DBAdapter {
 
 		/* General Key */
         KEY_ROWID = res.getString(R.string.db_key_row_id);
+        KEY_NAME = res.getString(R.string.db_key_name);
 
         /* Context Keys */
         KEY_ACTIVITY = res.getString(R.string.db_key_activity);
@@ -70,12 +72,13 @@ public class DBAdapter {
         KEY_GPS = res.getString(R.string.db_key_gps);
         KEY_AIRPLANE = res.getString(R.string.db_key_airplane);
 
-        ALL_KEYS = new String[]{ KEY_ROWID, KEY_ACTIVITY, KEY_PLACE, KEY_TIME,
+        ALL_KEYS = new String[]{ KEY_ROWID, KEY_NAME, KEY_ACTIVITY, KEY_PLACE, KEY_TIME,
             KEY_DAY, KEY_LOCATION, KEY_BLUETOOTH, KEY_WIFI, KEY_VOLUME,
             KEY_BRIGHTNESS, KEY_LOCATION_SERVICES, KEY_GPS, KEY_AIRPLANE };
 
         DATABASE_CREATE =
             "create table " + DATABASE_TABLE + "(_id integer primary key autoincrement, "
+            + KEY_NAME + " TEXT, "
             + KEY_ACTIVITY + " TEXT, "
             + KEY_PLACE + " TEXT, "
             + KEY_TIME + " TEXT, "
