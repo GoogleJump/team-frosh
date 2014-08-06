@@ -93,13 +93,17 @@ public class Place {
 
     @Override
     public String toString() {
-        try {
-			return "Place{ name=" + name + ", latitude=" + latitude + ", longitude=" + longitude + ", first_type="
-			    + types.getString(0) + ", id=" + id + " }";
-		} catch (JSONException e) {
-			return "Place{ name=" + name + ", latitude=" + latitude + ", longitude=" + longitude + ", id=" + id + " }";
-		}
-        //return "Place{" + "id=" + id + ", icon=" + icon + ", name=" + name + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+		return "Place{ name=" + name + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", first_type="
+				+ getFirstType() + ", id=" + id + " }";
+    }
+    
+    public String getFirstType() {
+    	try {
+    		return types.getString(0);
+    	} catch (JSONException e) {
+    		return "";
+    	}
     }
 
 }

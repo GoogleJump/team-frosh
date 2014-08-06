@@ -25,7 +25,9 @@
         android:gravity="center"
         android:text="Location Info Text View"
         android:textSize="15sp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
     <Switch
         android:id="@+id/location_switch"

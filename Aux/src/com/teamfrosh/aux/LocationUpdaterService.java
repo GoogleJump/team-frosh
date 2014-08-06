@@ -1,10 +1,12 @@
 package com.teamfrosh.aux;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -155,9 +157,14 @@ com.google.android.gms.location.LocationListener {
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
         showShortToast(msg);
-        ArrayList<String> places = new ArrayList<String>();
-        places.add("movie_theater");
-        //places.add("atm");
+        //ArrayList<String> places = new ArrayList<String>();
+        Resources res = this.getResources();
+        ArrayList<String> places = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.places_array)));
+        for (int i = 0; i < places.size(); i++) {
+        	places.set(i, places.get(i).toLowerCase().replace(
+					"-", "_").replace(" ", "_"));
+        	Log.v("EMPTY_TAG", places.get(i));
+        }
         GetPlaces getPlaces = new GetPlaces(this, places, location);
         getPlaces.execute();
 	}

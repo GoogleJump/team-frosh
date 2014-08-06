@@ -74,7 +74,7 @@ public class PlacesService {
 			urlString.append(Double.toString(latitude));
 			urlString.append(",");
 			urlString.append(Double.toString(longitude));
-			urlString.append("&radius=5000");
+			urlString.append("&radius=1000");
 			urlString.append("&types=");
             for (int i = 0; i < places.size(); i++) {
                 if (i < places.size() - 1)

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBAdapter {
 
@@ -164,6 +165,39 @@ public class DBAdapter {
             c.moveToFirst();
         }
         return c;
+    }
+    
+    // Get a profile for a recognized activity
+    public Cursor getProfileForActivity(String activity) {
+		if (activity != null) {
+			Log.v(MainActivity.SETTINGS_TAG, "Activity in DB = " + activity);
+			String select = KEY_ACTIVITY + "='" + activity + "'";
+			Cursor c = db.query(true, DATABASE_TABLE, ALL_KEYS, select, null,
+					null, null, null, null);
+			if (c != null) {
+				c.moveToFirst();
+			}
+			return c;
+		} else {
+			return null;
+		}
+    }
+    
+    // Get a profile for a place
+    public Cursor getProfileForPlace(String pl) {
+		if (pl != null) {
+			String place = pl.replace("_", " ");
+			Log.v(MainActivity.SETTINGS_TAG, "Place in DB = " + place);
+			String select = KEY_PLACE + "='" + place + "'";
+			Cursor c = db.query(true, DATABASE_TABLE, ALL_KEYS, select, null,
+					null, null, null, null);
+			if (c != null) {
+				c.moveToFirst();
+			}
+			return c;
+		} else {
+			return null;
+		}
     }
     
     // Return all data in the database

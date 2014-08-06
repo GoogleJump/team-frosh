@@ -118,10 +118,10 @@ public class AddProfileActivity extends Activity implements
 		String activityOrPlaceName;
 		String activityOrPlaceKey;
 		if (useActivity && activitySpinner.getSelectedItem().toString().length() > 0) {
-			activityOrPlaceName = activitySpinner.getSelectedItem().toString();
+			activityOrPlaceName = activitySpinner.getSelectedItem().toString().toLowerCase();
 			activityOrPlaceKey = DBAdapter.KEY_ACTIVITY;
 		} else {
-			activityOrPlaceName = placeSpinner.getSelectedItem().toString();
+			activityOrPlaceName = placeSpinner.getSelectedItem().toString().toLowerCase();
 			activityOrPlaceKey = DBAdapter.KEY_PLACE;
 		}
 		
@@ -130,15 +130,15 @@ public class AddProfileActivity extends Activity implements
 		String brightness = Integer.toString(brightnessSeekBar.getProgress());
 		String wifi;
 		if (wifiSwitch.isChecked()) {
-			wifi = "On";
+			wifi = "on";
 		} else {
-			wifi = "Off";
+			wifi = "off";
 		}
 		String bluetooth;
 		if (bluetoothSwitch.isChecked()) {
-			bluetooth = "On";
+			bluetooth = "on";
 		} else { 
-			bluetooth = "Off";
+			bluetooth = "off";
 		}
 		
 		String[] columns = {activityOrPlaceKey, DBAdapter.KEY_NAME, DBAdapter.KEY_VOLUME, DBAdapter.KEY_BRIGHTNESS, 

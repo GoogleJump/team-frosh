@@ -22,7 +22,8 @@
         android:hint="@string/profile_name_textview_label"
         android:textSize="17sp"
         android:layout_below="@id/profile_name_textview_label"
-        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+        android:layout_marginTop="@dimen/add_profile_top_margin_default"
+        android:inputType="textCapWords" />
 
     <TextView
         android:id="@+id/activity_or_place_spinner_label"

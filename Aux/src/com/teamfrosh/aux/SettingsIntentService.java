@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -23,33 +24,14 @@ public class SettingsIntentService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		Log.v(MainActivity.SETTINGS_TAG, "Settings Intent Service");
-		int[] settingsArray = intent.getIntArrayExtra(getString(R.string.settings_array_tag));
-		boolean bluetooth;
-		boolean wifi;
-		int brightness = settingsArray[2];
-		int volume = settingsArray[3];
-		if (settingsArray[0] == 0) {
-			bluetooth = false;
-			Log.v(MainActivity.SETTINGS_TAG, "Bluetooth = false");
-		} else {
-			bluetooth = true;
-			Log.v(MainActivity.SETTINGS_TAG, "Bluetooth = true");
-		}
-		
-		if (settingsArray[1] == 0) {
-			wifi = false;
-			Log.v(MainActivity.SETTINGS_TAG, "Wifi = false");
-		} else {
-			wifi = true;
-			Log.v(MainActivity.SETTINGS_TAG, "Wifi = true");
-		}
-		Log.v(MainActivity.SETTINGS_TAG, "Volume = " + volume);
-		Log.v(MainActivity.SETTINGS_TAG, "Brightness = " + brightness);
-		
-		toggleBluetooth(bluetooth);
-		toggleWifi(wifi);
-		setVolume(volume);
-		setBrightness(brightness);
+		String activityName = intent.getStringExtra(getString(R.string.activity_name_tag));
+		String placeType = intent.getStringExtra(getString(R.string.place_type_tag));
+		DBAdapter myDBAdapter = new DBAdapter(this);
+		myDBAdapter.open();
+		Cursor cursor = myDBAdapter.getProfileForActivity(activityName);
+		changeSettingsForCursor(cursor);
+		cursor = myDBAdapter.getProfileForPlace(placeType);
+		changeSettingsForCursor(cursor);
 	}
 
     public void toggleBluetooth(boolean status) {
@@ -79,6 +61,38 @@ public class SettingsIntentService extends IntentService {
     public void setBrightness(int brightness) {
         ContentResolver cResolver = getContentResolver();
         System.putInt(cResolver, System.SCREEN_BRIGHTNESS, brightness);
+    }
+    
+    public void changeSettingsForCursor(Cursor cursor) {
+    	if (cursor != null && cursor.getCount() > 0) {
+			Log.v(MainActivity.SETTINGS_TAG, "Matched, toggling settings");
+			for (int i = 0; i < cursor.getColumnCount(); i++) {
+				String columnName = cursor.getColumnName(i);
+				String value = cursor.getString(i);
+				if (value != null && value.length() > 0) {
+					if (columnName.equals(DBAdapter.KEY_VOLUME)) {
+						setVolume(Integer.parseInt(value));
+					} else if (columnName.equals(DBAdapter.KEY_BRIGHTNESS)) {
+						setBrightness(Integer.parseInt(value));
+					} else if (columnName.equals(DBAdapter.KEY_WIFI)) {
+						if (value.equalsIgnoreCase("on")) {
+							toggleWifi(true);
+						} else {
+							toggleWifi(false);
+						}
+					} else if (columnName.equals(DBAdapter.KEY_BLUETOOTH)) {
+						if (value.equalsIgnoreCase("on")) {
+							toggleBluetooth(true);
+						} else {
+							toggleBluetooth(false);
+						}
+					}
+				}
+			}
+		} else {
+			// Do nothing
+			Log.v(MainActivity.SETTINGS_TAG, "No match");
+		}
     }
 
 }

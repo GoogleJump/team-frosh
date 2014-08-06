@@ -14,6 +14,7 @@
 
     <!-- Tags -->
 	<string name="activity_name_tag">activity_name_tag</string>
+	<string name="place_type_tag">place_type_tag</string>
 	<string name="settings_array_tag">settings_array_tag</string>
 
     <!-- Prefs Keys -->
