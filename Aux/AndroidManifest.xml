@@ -28,13 +28,18 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.teamfrosh.aux.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity 
+            android:name="com.teamfrosh.aux.AddProfileActivity"
+            android:parentActivityName="com.teamfrosh.aux.MainActivity"
+            android:label="@string/add_profile_label" />
         <receiver android:name="com.teamfrosh.aux.BootReceiver">
             <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -204,7 +204,8 @@ public class MainActivity extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.action_add_profile:
-			Toast.makeText(this, "Add Pressed", Toast.LENGTH_SHORT).show();
+			Intent toAddActivity = new Intent(this, AddProfileActivity.class);
+			startActivity(toAddActivity);
 			return true;
 		case R.id.action_settings:
 			Toast.makeText(this, "Settings Pressed", Toast.LENGTH_SHORT).show();

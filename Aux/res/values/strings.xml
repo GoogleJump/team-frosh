@@ -4,9 +4,13 @@
     <!-- General Strings -->
     <string name="app_name">Aux</string>
     <string name="hello_world">Hello world!</string>
+    <string name="done">Done</string>
 	<string name="echo_location_info">echo_location_info_tag</string>
 	<string name="location_services_toggle">Location Services Toggle</string>
 	<string name="activity_recognition_toggle">Activity Recognition Toggle</string>
+	
+	<!-- Labels -->
+	<string name="add_profile_label">New Profile</string>
 
     <!-- Tags -->
 	<string name="activity_name_tag">activity_name_tag</string>
@@ -20,6 +24,13 @@
 	<string name="action_add_profile">Add Profile</string>
 	<string name="action_settings">Settings</string>
 	<string name="empty_profile_list">No Profiles</string>
+	<!-- Add Profile Activity -->
+	<string name="activity_or_place_spinner_label">Choose Activity or Place</string>
+	<string name="volume_seekbar_label">Choose Ringer Volume</string>
+	<string name="brightness_seekbar_label">Choose Brightness Level</string>
+	<string name="wifi_toggle_label">Wifi</string>
+	<string name="bluetooth_toggle_label">Bluetooth</string>
+	<string name="add_profile">Add Profile</string>
 	
     <!-- DB Keys -->
     <string name="db_key_row_id">_id</string>

@@ -16,38 +16,39 @@ import android.widget.Toast;
 public class ProfileLoaderListFragment extends ListFragment {
 	// This is the Adapter being used to display the list's data.
 	ProfileSimpleCursorAdapter mAdapter;
-	
-	public static String KEY_ACTIVITY;
-	public static String KEY_PLACE;
+	private DBAdapter myDBAdapter;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Resources res = getActivity().getResources();
-		/* Context Keys */
-        KEY_ACTIVITY = res.getString(R.string.db_key_activity);
-        KEY_PLACE = res.getString(R.string.db_key_place);
 		
 		// Give some text to display if there is no data.
 		setEmptyText(getString(R.string.empty_profile_list));
         
-		DBAdapter myDBAdapter = new DBAdapter(getActivity());
+		myDBAdapter = new DBAdapter(getActivity());
 		myDBAdapter.open();
-		//myDBAdapter.insertProfile(new String[]{KEY_ACTIVITY, KEY_PLACE}, new String[]{"still", "theater"});
-		myDBAdapter.deleteAllProfiles();
 		Cursor allProfilesCursor = myDBAdapter.getAllProfiles();
-		Log.v(MainActivity.LIST_TAG, "Num rows = " + allProfilesCursor.getCount());
 		myDBAdapter.close();
 		// Create an adapter we will use to display the loaded data
 		mAdapter = new ProfileSimpleCursorAdapter(getActivity(), 
 				R.layout.profile_list_item, allProfilesCursor, 
-				new String[] {KEY_ACTIVITY, KEY_PLACE},
+				new String[] {DBAdapter.KEY_ACTIVITY, DBAdapter.KEY_PLACE},
 				new int[] {R.id.activity_text_view, R.id.place_text_view}, 0);
 		setListAdapter(mAdapter);
 		
 		// Start out with a progress indicator
 		setListShown(true);
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		myDBAdapter.open();
+		Cursor allProfilesCursor = myDBAdapter.getAllProfiles();
+		mAdapter.swapCursor(allProfilesCursor);
+		myDBAdapter.close();
+	}
+	
 	
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_profile_rel_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp" >
+
+    <TextView
+        android:id="@+id/activity_or_place_spinner_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_or_place_spinner_label"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/spinner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_or_place_spinner_label"
+        android:orientation="horizontal" >
+        <Spinner
+            android:id="@+id/activity_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Spinner
+            android:id="@+id/place_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/volume_seekbar_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volume_seekbar_label"
+        android:textSize="20sp"
+        android:layout_below="@id/spinner_layout"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <SeekBar 
+        android:id="@+id/volume_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/volume_seekbar_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <TextView
+        android:id="@+id/brightness_seekbar_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/brightness_seekbar_label"
+        android:textSize="20sp"
+        android:layout_below="@id/volume_seekbar"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <SeekBar 
+        android:id="@+id/brightness_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brightness_seekbar_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <TextView
+        android:id="@+id/wifi_toggle_label"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/wifi_toggle_label"
+        android:textSize="20sp"
+        android:layout_below="@id/brightness_seekbar"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <Switch 
+        android:id="@+id/wifi_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brightness_seekbar"
+        android:layout_toRightOf="@id/wifi_toggle_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <TextView
+        android:id="@+id/bluetooth_toggle_label"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/bluetooth_toggle_label"
+        android:textSize="20sp"
+        android:layout_below="@id/wifi_toggle_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <Switch 
+        android:id="@+id/bluetooth_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wifi_toggle_label"
+        android:layout_toRightOf="@id/bluetooth_toggle_label"
+        android:layout_marginTop="@dimen/add_profile_top_margin_default" />
+    
+    <Button
+        android:id="@+id/add_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add_profile"
+        android:textSize="20sp"
+        android:onClick="addProfile" />
+
+
+</RelativeLayout>
